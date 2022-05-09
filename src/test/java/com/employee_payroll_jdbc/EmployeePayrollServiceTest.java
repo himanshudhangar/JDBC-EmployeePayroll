@@ -29,13 +29,33 @@ public class EmployeePayrollServiceTest {
 		Assert.assertTrue(result);
 
 	}
-	
+
 	
 	@Test
-	public void givenEmployeePayrollDatabase_ShouldUpdateSalaryUsingPreparedStatement() throws EmployeePayrollExcepation {
+	public void givenEmployeePayrollDatabase_ShouldUpdateSalaryUsingPreparedStatement()
+			throws EmployeePayrollExcepation {
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService();
 		boolean result = employeePayrollService.updateSalaryPrepared();
 		Assert.assertTrue(result);
+
+	}
+
+	
+	@Test
+	public void givenEmployeePayrollDatabase_ShouldReturnEmployeeDetailsUsingPreparedStatement()
+			throws EmployeePayrollExcepation {
+		EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+		boolean result = employeePayrollService.retrievePrepared("Tersia");
+		Assert.assertTrue(result);
+
+	}
+
+	
+	@Test
+	public void givenEmployeePayrollDatabase_ShouldReturnEmployeeDetailsUsingBasedOndate()
+			throws EmployeePayrollExcepation, ClassNotFoundException, SQLException {
+		EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+		employeePayrollService.retrieveDate();
 
 	}
 }

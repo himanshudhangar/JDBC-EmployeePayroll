@@ -10,11 +10,7 @@ import java.util.Enumeration;
 
 import com.mysql.cj.jdbc.Driver;
 
-/**
- * 
- * EmployeePayrollService class demonstrated CRUD operations
- *
- */
+
 public class EmployeePayrollService {
 	private static final String url = "jdbc:mysql://localhost:3306/payroll_service";
 	private static final String userName = "root";
@@ -43,9 +39,7 @@ public class EmployeePayrollService {
 
 	}
 
-	/**
-	 * method to list the drivers
-	 */
+	
 	private void listDrivers() {
 		Enumeration<java.sql.Driver> driverList = DriverManager.getDrivers();
 		while (driverList.hasMoreElements()) {
@@ -54,12 +48,7 @@ public class EmployeePayrollService {
 		}
 	}
 
-	/**
-	 * method to select data from the database
-	 * 
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
+	
 	public void selectData() throws ClassNotFoundException, SQLException {
 		Connection connection = getConnection();
 		Statement statement = connection.createStatement();
@@ -71,12 +60,7 @@ public class EmployeePayrollService {
 
 	}
 
-	/**
-	 * method to update the salary
-	 * 
-	 * @return
-	 * @throws EmployeePayrollException
-	 */
+	
 	public boolean updateSalary() throws EmployeePayrollExcepation {
 		Connection connection;
 		boolean success = false;
@@ -99,13 +83,14 @@ public class EmployeePayrollService {
 	}
 
 	public boolean updateSalaryPrepared() throws EmployeePayrollExcepation {
-		
+
 		Connection connection;
 		boolean success = false;
 		try {
 			connection = getConnection();
 			Statement statement = connection.createStatement();
-			PreparedStatement preparedStatement = connection.prepareStatement("update employee_payroll set salary=? where name=?");
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("update employee_payroll set salary=? where name=?");
 			preparedStatement.setDouble(1, 300000);
 			preparedStatement.setString(2, "Tersia");
 			success = true;
@@ -116,7 +101,38 @@ public class EmployeePayrollService {
 		}
 
 		return success;
-		
+
+	}
+
+	
+	public boolean retrievePrepared(String name) throws EmployeePayrollExcepation {
+		Connection connection;
+		boolean success = false;
+		try {
+			connection = getConnection();
+			Statement statement = connection.createStatement();
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("select * from employee_payroll where name=?");
+			preparedStatement.setString(1, name);
+			success = true;
+		} catch (ClassNotFoundException e) {
+			throw new EmployeePayrollExcepation("class not found");
+		} catch (SQLException e) {
+			throw new EmployeePayrollExcepation("sql exception");
+		}
+
+		return success;
+
+	}
+
+	public void retrieveDate() throws ClassNotFoundException, SQLException {
+		Connection connection = getConnection();
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery("select * from employee_payroll where start BETWEEN CAST('2018-01-01' AS DATE) AND DATE(NOW())");
+		while (resultSet.next()) {
+			System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2) + " " + resultSet.getString(3) + " "
+					+ resultSet.getDouble(4) + " " + resultSet.getDate(5));
+		}
 	}
 
 }
