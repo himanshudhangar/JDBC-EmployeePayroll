@@ -20,6 +20,7 @@ public class AppTest
         return new TestSuite( AppTest.class );
     }
 
+    
     public void testApp()
     {
         assertTrue( true );

@@ -9,6 +9,7 @@ import java.util.Enumeration;
 
 import com.mysql.cj.jdbc.Driver;
 
+
 public class EmployeePayrollService {
 	private static final String url = "jdbc:mysql://localhost:3306/payroll_service";
 	private static final String userName = "root";
@@ -32,7 +33,6 @@ public class EmployeePayrollService {
 
 	}
 
-	
 	private void listDrivers() {
 		Enumeration<java.sql.Driver> driverList = DriverManager.getDrivers();
 		while (driverList.hasMoreElements()) {
@@ -50,6 +50,28 @@ public class EmployeePayrollService {
 			System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2) + " " + resultSet.getString(3) + " "
 					+ resultSet.getDouble(4) + " " + resultSet.getDate(5));
 		}
+
+	}
+
+	
+	public boolean updateSalary() throws EmployeePayrollExcepation {
+		Connection connection;
+		boolean success = false;
+		try {
+			connection = getConnection();
+			Statement statement = connection.createStatement();
+			int result = statement.executeUpdate("update employee_payroll set salary=300000 where name='Tersia'");
+			if (result > 0) {
+				System.out.println("updated");
+				success = true;
+			}
+		} catch (ClassNotFoundException e) {
+			throw new EmployeePayrollExcepation("class not found");
+		} catch (SQLException e) {
+			throw new EmployeePayrollExcepation("sql exception");
+		}
+
+		return success;
 
 	}
 
