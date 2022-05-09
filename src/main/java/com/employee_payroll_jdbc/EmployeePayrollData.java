@@ -3,7 +3,6 @@ package com.employee_payroll_jdbc;
 import java.time.LocalDate;
 
 public class EmployeePayrollData {
-
 	int id;
 	String name;
 	String gender;
@@ -17,7 +16,6 @@ public class EmployeePayrollData {
 		this.gender = gender;
 		this.salary = salary;
 	}
-
 	public EmployeePayrollData(int id, String name, String gender, double salary, LocalDate startDate) {
 		super();
 		this.id = id;
@@ -26,7 +24,6 @@ public class EmployeePayrollData {
 		this.salary = salary;
 		this.startDate = startDate;
 	}
-
 	public int getId() {
 		return id;
 	}
@@ -34,7 +31,6 @@ public class EmployeePayrollData {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
@@ -72,5 +68,4 @@ public class EmployeePayrollData {
 		return "EmployeePayrollData [id=" + id + ", name=" + name + ", gender=" + gender + ", salary=" + salary
 				+ ", startDate=" + startDate + "]";
 	}
-
 }
