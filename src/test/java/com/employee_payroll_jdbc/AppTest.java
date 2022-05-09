@@ -14,7 +14,7 @@ public class AppTest
         super( testName );
     }
 
-    
+   
     public static Test suite()
     {
         return new TestSuite( AppTest.class );

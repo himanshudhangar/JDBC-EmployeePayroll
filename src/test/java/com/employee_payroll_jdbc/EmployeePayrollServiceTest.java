@@ -29,4 +29,24 @@ public class EmployeePayrollServiceTest {
 		Assert.assertTrue(result);
 
 	}
+
+	
+	@Test
+	public void givenEmployeePayrollDatabase_ShouldUpdateSalaryUsingPreparedStatement()
+			throws EmployeePayrollExcepation {
+		EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+		boolean result = employeePayrollService.updateSalaryPrepared();
+		Assert.assertTrue(result);
+
+	}
+
+	
+	@Test
+	public void givenEmployeePayrollDatabase_ShouldReturnEmployeeDetailsUsingPreparedStatement()
+			throws EmployeePayrollExcepation {
+		EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+		boolean result = employeePayrollService.retrievePrepared("Tersia");
+		Assert.assertTrue(result);
+
+	}
 }
